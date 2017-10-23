@@ -2,6 +2,8 @@ package com.ioof.date;
 
 /**
  * Created by jan on 22/10/17.
+ * <p>
+ * This class will maintain the day
  */
 public class Day {
 

@@ -2,6 +2,8 @@ package com.ioof.date;
 
 /**
  * Created by jan on 22/10/17.
+ *
+ * This will store month and calculates the days till previous month.
  */
 public class Month {
 
@@ -19,6 +21,12 @@ public class Month {
         return month;
     }
 
+    /**
+     * This will return the days till previous month based on leap year.
+     *
+     * @param leapYear
+     * @return
+     */
     public int daysTillMonth(boolean leapYear) {
         int leap = leapYear ? 1 : 0;
         switch (month) {
@@ -51,6 +59,13 @@ public class Month {
         }
     }
 
+
+    /**
+     * This will return days count for respective months either 28, 30 or 31.
+     *
+     * @param leapYear
+     * @return
+     */
     public int daysCount(boolean leapYear) {
         switch (month) {
             case 2:

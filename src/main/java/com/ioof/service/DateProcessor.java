@@ -1,9 +1,7 @@
 package com.ioof.service;
 
-import com.ioof.exception.DateFormatException;
 import com.ioof.date.IoofDate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.ioof.exception.DateFormatException;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,17 +9,22 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+
 /**
  * Created by jan on 22/10/17.
+ * DateProcessor will scan from command line input or will read a file and then process the dates pairs.
  */
 @Service
 public class DateProcessor {
-    protected final Log logger = LogFactory.getLog(getClass());
     private IoofDate earliestDate, latestDate;
     private Boolean keepExecuting = true;
 
+
+    /**
+     * This method scans the string and then process the pair of dates to get the difference or displays the error. It will continue until 'Exit' keyword is entered or terminated.
+     */
     public void scanAndProcess() {
-        System.out.println("\nEnter pairs of dates where the first date should be earliest, the second date the latest");
+        System.out.println("\nEnter pairs of dates starting from 1900 where the first date should be earliest, the second date the latest");
         System.out.println("Enter pairs of dates the following format or 'Exit' to terminate ");
         System.out.println("DD MM YYYY, DD MM YYYY");
 
@@ -45,6 +48,9 @@ public class DateProcessor {
         }
     }
 
+    /**
+     * This method reads the lines from file and then process the pair of dates to get the difference or displays the error.
+     */
     public String readAndProcess(String fileName) {
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
@@ -74,8 +80,11 @@ public class DateProcessor {
         return "";
     }
 
-    public Long process(String commandStr) throws DateFormatException {
-        String dates[] = commandStr.split(",");
+    /**
+     * This method accepts string of dates pairs and then creates Date class to
+     */
+    public Long process(String dateStr) throws DateFormatException {
+        String dates[] = dateStr.split(",");
         if (dates.length < 2) {
             throw new DateFormatException("Invalid dates. Enter pairs of dates,  'DD MM YYYY,DD MM YYYY'");
         }

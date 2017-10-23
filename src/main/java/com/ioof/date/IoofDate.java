@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Vivek on 22/10/17.
+ * <p>
+ * IoofDate: Validate entered string as DD MM YYYY and create date by extracting Day, Month & Year from string.
  */
 
 public class IoofDate {
@@ -28,26 +30,55 @@ public class IoofDate {
         }
     }
 
+    /**
+     * Returns the day
+     *
+     * @return
+     */
     public Day getDay() {
         return day;
     }
 
+    /**
+     * Returns the month
+     *
+     * @return
+     */
     public Month getMonth() {
         return month;
     }
 
+    /**
+     * Returns the year
+     *
+     * @return
+     */
     public Year getYear() {
         return year;
     }
 
+    /**
+     * Check if entered dateString is valid format and valid day against the months. For example, 31 April is invalid, 29 Feb is Valid for Leap Year
+     *
+     * @return
+     */
     public Boolean isValid() {
         return valid && getDay().getValue() <= getMonth().daysCount(getYear().isLeap());
     }
 
+    /**
+     * This will return totol number of days till date. It will calculate based on days till previous + day till previous month + day
+     * @return
+     */
     public Long getTotalDays() {
         return isValid() ? getYear().daysBeforeYear() + getMonth().daysTillMonth(getYear().isLeap()) + getDay().getValue() : 0l;
     }
 
+    /**
+     * calculate the days difference between earlies and latest date.
+     * @param earliestDate
+     * @return
+     */
     public Long difference(IoofDate earliestDate) {
         return this.getTotalDays() - earliestDate.getTotalDays();
     }

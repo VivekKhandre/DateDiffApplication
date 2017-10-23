@@ -11,6 +11,8 @@ import java.util.Arrays;
 
 /**
  * Created by jan on 22/10/17.
+ * Spring boot command line runner application
+ *
  */
 
 @SpringBootApplication
@@ -23,10 +25,15 @@ public class Application implements CommandLineRunner {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * If command line argument is passed then run application using dates.txt .
+     * @param args
+     * @throws Exception
+     */
     @Override
     public void run(String... args) throws Exception {
         if (args != null && args.length > 1) {
-            dateProcessor.readAndProcess(args[1] != null ? args[1] : "application.properties");
+            dateProcessor.readAndProcess(args[1] != null ? args[1] : "dates.txt");
         } else {
             dateProcessor.scanAndProcess();
         }
